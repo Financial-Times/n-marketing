@@ -1,0 +1,22 @@
+{
+  "name": "@financial-times/n-marketing",
+  "homepage": "https://github.com/Financial-Times/n-marketing",
+  "description": "Templates and logic for first party marketing and messaging",
+  "main": [
+    "main.scss",
+    "main.js"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "n-ui-foundations": "^1.0.0",
+    "n-sliding-popup": "^1.0.0",
+    "superstore": "^2.1.0"
+  }
+}

@@ -1,0 +1,10 @@
+/.sass-cache
+/bower_components/
+/build/
+/demo/main.js
+/demos/local/
+/node_modules/
+/public/
+/npm-debug.log
+
+.editorconfig
