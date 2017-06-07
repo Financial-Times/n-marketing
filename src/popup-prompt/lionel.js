@@ -1,4 +1,4 @@
-const SlidingPopup = require('n-sliding-popup').default;
+const SlidingPopup = require('n-sliding-popup');
 const Superstore = require('superstore');
 
 const utils = require('./utils');
