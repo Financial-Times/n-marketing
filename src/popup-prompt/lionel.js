@@ -1,8 +1,8 @@
-const SlidingPopup = require('n-sliding-popup');
-const Superstore = require('superstore');
+import SlidingPopup from 'n-sliding-popup';
+import Superstore from 'superstore';
 
-const utils = require('./utils');
-const { broadcast } = require('n-ui-foundations');
+import utils from './utils';
+import { broadcast } from 'n-ui-foundations';
 
 const promptLastSeenStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
 const promptLastSeenStorageKey = 'last-closed';
