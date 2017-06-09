@@ -1,4 +1,4 @@
-import utils from './utils';
+import * as utils from './utils';
 import lionel from './lionel';
 /*
 Show the subscription offer prompt.
