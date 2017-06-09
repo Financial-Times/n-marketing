@@ -1,25 +1,9 @@
 {
-  "name": "@financial-times/n-marketing",
+  "private": true,
   "version": "0.0.0",
-  "description": "Templates and logic for first party marketing and messaging",
   "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Financial-Times/n-marketing.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Financial-Times/n-marketing/issues"
-  },
-  "homepage": "https://github.com/Financial-Times/n-marketing#readme",
   "devDependencies": {
     "@financial-times/n-internal-tool": "^1.2.3",
-    "@financial-times/n-webpack": "^3.0.2",
-    "node-sass": "^4.5.3",
-    "webpack": "^1.0.0"
-  },
-  "dependencies": {
-    "superstore": "^2.1.0"
+    "@financial-times/n-webpack": "^3.0.2"
   }
 }
