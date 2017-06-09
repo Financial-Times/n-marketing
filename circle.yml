@@ -11,4 +11,3 @@ deployment:
     tag: /^v?\d+\.\d+\.\d+(?:-beta\.\d+)?$/
     owner: Financial-Times
     commands:
-      - make npm-publish
