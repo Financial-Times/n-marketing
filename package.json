@@ -15,8 +15,9 @@
   "homepage": "https://github.com/Financial-Times/n-marketing#readme",
   "devDependencies": {
     "@financial-times/n-internal-tool": "^1.2.3",
+    "@financial-times/n-webpack": "^3.0.2",
     "node-sass": "^4.5.3",
-    "webpack": "^2.6.1"
+    "webpack": "^1.0.0"
   },
   "dependencies": {
     "superstore": "^2.1.0"
