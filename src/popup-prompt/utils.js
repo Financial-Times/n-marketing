@@ -11,9 +11,9 @@ const padLeft = (string, length, character = '0') => {
 	return newString + string;
 }
 
-module.exports.getCookie = (key) => () => (document.cookie.match(`(^|;)\\s*${key}=([^;]+)`) || [])[2];
+export const getCookie = (key) => () => (document.cookie.match(`(^|;)\\s*${key}=([^;]+)`) || [])[2];
 
-module.exports.createElement = (tag, attributes, html) => {
+export const createElement = (tag, attributes, html) => {
 	const element = document.createElement(tag);
 	Object.keys(attributes || {}).forEach((key) => element.setAttribute(key, attributes[key]));
 	element.innerHTML = html;
@@ -21,7 +21,7 @@ module.exports.createElement = (tag, attributes, html) => {
 }
 
 // use Number#toLocaleString when we drop Safari 9 support
-module.exports.toCurrency = (amount, countryCode) => {
+export const toCurrency = (amount, countryCode) => {
 	const currencySymbol = {
 		GBP: '£',
 		EUR: '€',

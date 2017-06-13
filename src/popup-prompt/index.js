@@ -1,5 +1,6 @@
-const utils = require('./utils');
-const lionel = require('./lionel');
+import * as utils from './utils';
+import lionel from './lionel';
+
 /*
 Show the subscription offer prompt.
 There are currently two offers:
