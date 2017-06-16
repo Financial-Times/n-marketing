@@ -10,6 +10,7 @@ A sliding popup based on `n-sliding-popup` used for subscription discount messag
 
 ### Integration guide:
 To use n-marketing in your app add it as a bower dependency using `bower install n-marketing`
+
 Require it into your `app.js` file (or similar)
 ```
 import subscriptionOfferPrompt from 'n-marketing';
@@ -19,12 +20,12 @@ Initialise it by calling it with an object containing flags, and a boolean to de
 subscriptionOfferPrompt({flags, demoMode});
 ```
 
-### Local dev guide (make demo)
-use `make demo` to run the component locally and see any changes, bypassing the logic that determines whether the slider is shown
+### Running n-marketing locally
+use `make demo` to run the component locally and view any changes, bypassing the logic that determines whether the slider is shown
 
-The demo function takes two parameters
-- `countryCode` an ISO country code string. Use this to see how different currencies and location specific offers display
-- `withDiscount` a boolean indicating whether an additional discount is being applied to the slider, the logic for which sits in `lionel.js`
+The demo function takes two parameters:
+- `countryCode` - an ISO country code string. Use this to see how different currencies and location specific offers display
+- `withDiscount` - a boolean indicating whether an additional discount is being applied to the slider, the logic for which sits in `lionel.js`
 
 Paramaters passed to the demo are hardcoded in `index.js`, change them manually to view variations of the slider:
 
