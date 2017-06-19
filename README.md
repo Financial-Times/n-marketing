@@ -11,14 +11,15 @@ A sliding popup based on `n-sliding-popup` used for subscription discount messag
 ### Integration guide:
 To use n-marketing in your app add it as a bower dependency using `bower install n-marketing`
 
-Require it into your `app.js` file (or similar)
+Require it into your client `main.js` file (or similar)
 ```
 import subscriptionOfferPrompt from 'n-marketing';
 ```
-Initialise it by calling it with an object containing flags, and a boolean to determine whether to render in demo mode
+Initialise it by calling it with an object containing flags, and, optionally, a property with key `demoMode` and value `true` or `false` to determine whether to render in demo mode
 ```
-subscriptionOfferPrompt({flags, demoMode});
+subscriptionOfferPrompt({flags, demoMode: false});
 ```
+You'll also need to import the css into your client `main.scss` file.
 
 ### Running n-marketing locally
 use `make demo` to run the component locally and view any changes, bypassing the logic that determines whether the slider is shown
