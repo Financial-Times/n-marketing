@@ -136,6 +136,7 @@ const getPrice = (countryCode, withDiscount) => {
 			JPN: [583, 'JPN'],
 			SGP: [555, 'SGD'],
 			USA: [429, 'USD'],
+			IND: [429, 'USD'],
 			default: [395, 'EUR']
 		};
 	} else {
@@ -148,6 +149,7 @@ const getPrice = (countryCode, withDiscount) => {
 			JPN: [65300, 'JPN'], // This is different from API (653)
 			SGP: [619, 'SGD'],
 			USA: [429, 'USD'],
+			IND: [470, 'USD'],
 			default: [439, 'EUR']
 		};
 	}
@@ -164,6 +166,7 @@ const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 };
 
 const render = (countryCode, withDiscount) => {
+	// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 	if (['SPM', 'ALA', 'BLM', 'MAF', 'AND', 'REU', 'GLP', 'MYT', 'MTQ', 'ZWE'].indexOf(countryCode) > -1) {
 		return;
 	}
@@ -178,7 +181,6 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 						render(countryCode, flags.get('priceFlashSale'))
 					});
 			}

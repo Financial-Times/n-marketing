@@ -3,6 +3,7 @@
   "main": "main.js",
   "devDependencies": {
     "@financial-times/n-internal-tool": "^1.2.3",
-    "@financial-times/n-webpack": "^3.0.2"
+    "@financial-times/n-webpack": "^3.0.2",
+    "css-loader": "^0.26.1"
   }
 }
