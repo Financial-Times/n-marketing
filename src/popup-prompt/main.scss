@@ -6,7 +6,7 @@
 }
 
 .subscription-prompt--flag {
-	background-color: #E76836;
+	background-color: oColorsGetPaletteColor('black');
 	border-radius: 3px;
 	padding: 4px 9px 5px;
 	text-align: center;
@@ -20,29 +20,29 @@
 }
 
 .subscription-prompt .subscription-prompt--heading {
-	@include oTypographySansBold(m);
-	color: oColorsGetPaletteColor('grey-tint5');
+	@include oTypographySansBold(-1);
+	color: oColorsGetPaletteColor('black-80');
 	margin: 0 0 4px;
 
 	@include oGridRespondTo(M) {
-		@include oTypographySansBold(l);
+		@include oTypographySansBold(2);
 	}
 }
 
 .subscription-prompt .subscription-prompt--subheading {
-	@include oTypographySansBold(s);
+	@include oTypographySansBold(-2);
 	font-weight: 300;
-	color: oColorsGetPaletteColor('grey-tint5');
+	color: oColorsGetPaletteColor('black-80');
 	display: inline-block;
 	margin-bottom: 20px;
 
 	@include oGridRespondTo(M) {
-		@include oTypographySans(m);
+		@include oTypographySans(-1);
 	}
 }
 
 .subscription-prompt--benefits {
-	@include oTypographySansBold(s);
+	@include oTypographySansBold(-2);
 	display: none;
 	list-style: none;
 	font-weight: normal;
@@ -58,7 +58,7 @@
 	position: relative;
 	margin-left: 20px;
 	margin-bottom: 6px;
-	color: oColorsGetPaletteColor('grey-tint5');
+	color: oColorsGetPaletteColor('black-80');
 
 	&:before {
 		@include oIconsGetIcon('tick', #35bd14, 14, $iconset-version: 1);
@@ -71,9 +71,9 @@
 }
 
 .subscription-prompt .subscription-prompt--subscribe-btn {
-	@include oButtons(medium, standard);
-	@include oButtonsSize(small);
-	@include oButtonsTheme(standout);
+	@include oButtons(default, Secondary);
+	@include oButtonsSize(default);
+	@include oButtonsTheme(Primary);
 
 	font-size: 16px;
 	text-transform: none;
@@ -102,6 +102,6 @@
 }
 
 .subscription-prompt--figure-caption {
-	color: oColorsGetPaletteColor('grey-tint5');
+	color: oColorsGetPaletteColor('black-80');
 	font-size: 16px;
 }
