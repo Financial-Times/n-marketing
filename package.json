@@ -4,6 +4,11 @@
   "devDependencies": {
     "@financial-times/n-internal-tool": "^1.2.3",
     "@financial-times/n-webpack": "^3.0.2",
-    "css-loader": "^0.26.1"
+    "babel-register": "^6.24.1",
+    "chai": "^4.0.2",
+    "css-loader": "^0.26.1",
+    "mocha": "^3.4.2",
+    "proxyquire": "^1.8.0",
+    "sinon": "^2.3.5"
   }
 }
