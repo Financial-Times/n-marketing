@@ -1,47 +1,67 @@
-import sinon from 'sinon';
 import { expect } from 'chai';
-import proxyquire from 'proxyquire';
+import sinon from 'sinon';
+import subscriptionOfferPrompt from '../src/popup-prompt/index';
+import * as lionel from '../src/popup-prompt/lionel';
+import api from '../src/popup-prompt/countryApi';
 
-describe('index', function () {
-	let utilsStub;
+sinon.stub(api, 'getCountryCode', function () {
+	return 'GBR';
+})
+
+describe('Subscription Offer Prompt Init', () => {
+
 	let lionelStub;
-	let index;
+	let flags;
 
-
-	beforeEach(function () {
-		utilsStub = {
-			toCurrency: sinon.stub()
-		};
-		lionelStub = sinon.stub();
-
-		index = proxyquire('../src/popup-prompt/index', {
-			'./utils': {
-				default: () => {
-					return utilsStub;
-				}
-			},
-			'./lionel': {
-				lionel: () => lionelStub
-			}
-		})
-
+	beforeEach(() => {
+		Object.defineProperty(document, 'cookie', { value: '', configurable: true });
+		lionelStub = sinon.spy(lionel, 'init');
+		// stub out the flag.get(b2cMessagePrompt) = true
+		flags = { get: (val) => val === 'b2cMessagePrompt' };
 	});
 
-	afterEach(function () {
-		utilsStub = null;
+
+	afterEach(() => {
+		delete document.cookie;
 		lionelStub.restore();
+		flags = null;
 	});
 
+	it('should not init any prompt if on barrier pages', () => {
+		const barrier = document.createElement('div');
+		barrier.className = 'ft-subscription-panel';
+		document.body.appendChild(barrier);
+		subscriptionOfferPrompt({flags});
+		sinon.assert.notCalled(lionelStub);
+		document.body.removeChild(barrier);
+	});
 
-	describe('init lionel', function () {
+	it('should not init any prompt if logged in', () => {
+		Object.defineProperty(document, 'cookie', { value: 'FTSession=foo', configurable: true });
 
-		it('should do what...', function (done) {
+		subscriptionOfferPrompt({flags});
+		sinon.assert.notCalled(lionelStub);
+	});
 
-			index({flags:'', demoMode:true})
+	it('should not init any prompt if B2B referrer cookie exists', () => {
+		Object.defineProperty(document, 'cookie', { value: 'FTBarrierAcqCtxRef=foo', configurable: true });
 
-		});
+		subscriptionOfferPrompt({flags});
+		sinon.assert.notCalled(lionelStub);
+	});
 
+	it('should not init any prompt if b2cMessagePrompt flag is false', () => {
+		// stub out the flag.get(b2cMessagePrompt) = false
+		flags = { get: (val) => { if(val === 'b2cMessagePrompt') return false } }
 
+		subscriptionOfferPrompt({flags});
+		sinon.assert.notCalled(lionelStub);
+	});
+
+	it('should init "Lionel slider" if NOT logged in & NOT on barrier page & NOT coming from a B2B prospect barrier & NOT on /us-election-2016 page', () => {
+
+		subscriptionOfferPrompt({flags});
+		sinon.assert.notCalled(lionelStub);
 	});
 
 });

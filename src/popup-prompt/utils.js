@@ -1,4 +1,4 @@
-const padLeft = (string, length, character = '0') => {
+export const padLeft = (string, length, character = '0') => {
 	string = String(string);
 	if (string.length === length) {
 		return string;

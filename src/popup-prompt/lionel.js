@@ -181,7 +181,7 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						render(countryCode, flags.get('priceFlashSale'))
+						return render(countryCode, flags.get('priceFlashSale'));
 					});
 			}
 		});
