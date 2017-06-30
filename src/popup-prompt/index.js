@@ -32,7 +32,10 @@ const isB2bUser = utils.getCookie('FTBarrierAcqCtxRef');
 */
 // TODO a11y: move focus to _any_ pop up
 module.exports = function init ({flags, demoMode}) {
-	if (demoMode) return lionel.render('GBR', false);
+	if (demoMode) {
+		console.log('it is demoMode:', demoMode)
+		return lionel.render('GBR', false);
+	}
 	const messagesEnabled = flags.get('b2cMessagePrompt');
 	if (isLoggedIn() || isB2bUser() || document.querySelector('.ft-subscription-panel') || !messagesEnabled || document.querySelector('.inline-barrier') || document.querySelector('.sub-header--fastft') ) {
 		return;

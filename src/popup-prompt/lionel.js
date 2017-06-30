@@ -166,6 +166,7 @@ const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 };
 
 const render = (countryCode, withDiscount) => {
+	console.log("*******GOT HERE***********");
 	// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 	if (['SPM', 'ALA', 'BLM', 'MAF', 'AND', 'REU', 'GLP', 'MYT', 'MTQ', 'ZWE'].indexOf(countryCode) > -1) {
 		return;

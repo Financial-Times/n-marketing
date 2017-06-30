@@ -11,11 +11,13 @@ sinon.stub(api, 'getCountryCode', function () {
 describe('Subscription Offer Prompt Init', () => {
 
 	let lionelStub;
+	let lionelRenderStub;
 	let flags;
 
 	beforeEach(() => {
 		Object.defineProperty(document, 'cookie', { value: '', configurable: true });
 		lionelStub = sinon.spy(lionel, 'init');
+		lionelRenderStub = sinon.spy(lionel, 'render')
 		// stub out the flag.get(b2cMessagePrompt) = true
 		flags = { get: (val) => val === 'b2cMessagePrompt' };
 	});
@@ -24,6 +26,7 @@ describe('Subscription Offer Prompt Init', () => {
 	afterEach(() => {
 		delete document.cookie;
 		lionelStub.restore();
+		lionelRenderStub.restore();
 		flags = null;
 	});
 
@@ -61,7 +64,15 @@ describe('Subscription Offer Prompt Init', () => {
 	it('should init "Lionel slider" if NOT logged in & NOT on barrier page & NOT coming from a B2B prospect barrier & NOT on /us-election-2016 page', () => {
 
 		subscriptionOfferPrompt({flags});
-		sinon.assert.notCalled(lionelStub);
+		sinon.assert.notCalled(lionelStub); // what is this actually testing??
 	});
 
+	it.only('should render "Lionel slider" if demoMode is true, bypassing the init function', function () {
+		// const renderStub = sinon.stub(lionel, 'render');
+
+		subscriptionOfferPrompt({flags, demoMode: true});
+		console.log(lionelRenderStub)
+		// sinon.assert.notCalled(lionelStub);
+		sinon.assert.called(lionelRenderStub);
+	});
 });
