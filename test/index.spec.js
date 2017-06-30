@@ -68,11 +68,9 @@ describe('Subscription Offer Prompt Init', () => {
 	});
 
 	it.only('should render "Lionel slider" if demoMode is true, bypassing the init function', function () {
-		// const renderStub = sinon.stub(lionel, 'render');
-
 		subscriptionOfferPrompt({flags, demoMode: true});
 		console.log(lionelRenderStub)
-		// sinon.assert.notCalled(lionelStub);
+		sinon.assert.notCalled(lionelStub);
 		sinon.assert.called(lionelRenderStub);
 	});
 });
