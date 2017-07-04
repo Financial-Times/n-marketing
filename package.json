@@ -15,5 +15,9 @@
     "mocha": "^3.4.2",
     "proxyquire": "^1.8.0",
     "sinon": "^2.3.5"
+  },
+  "scripts": {
+    "precommit": "node_modules/.bin/secret-squirrel",
+    "prepush": "make verify -j3"
   }
 }

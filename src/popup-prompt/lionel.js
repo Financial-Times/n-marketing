@@ -77,7 +77,7 @@ const createSubscriptionPrompt = values => {
 		focusableElements.forEach((elem) => {
 			elem.setAttribute('tabindex', '-1');
 		});
-	}
+	};
 	document.body.appendChild(subscriptionPrompt);
 
 	let firstTabStop = focusableElements[0];
@@ -166,14 +166,13 @@ const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 };
 
 const render = (countryCode, withDiscount) => {
-	console.log("*******GOT HERE***********");
 	// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 	if (['SPM', 'ALA', 'BLM', 'MAF', 'AND', 'REU', 'GLP', 'MYT', 'MTQ', 'ZWE'].indexOf(countryCode) > -1) {
 		return;
 	}
 	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount);
 	return createSubscriptionPrompt(subscriptionValues);
-}
+};
 
 const init = (flags) => {
 	return shouldPromptBeShown()
@@ -186,6 +185,6 @@ const init = (flags) => {
 					});
 			}
 		});
-}
+};
 
-module.exports = {init, render}
+module.exports = {init, render};

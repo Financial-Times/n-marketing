@@ -8,3 +8,4 @@
 /npm-debug.log
 
 .editorconfig
+.eslintrc.js

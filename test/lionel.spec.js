@@ -6,10 +6,10 @@ import { init } from '../src/popup-prompt/lionel';
 
 const delay = (ms, value) => new Promise(resolve => setTimeout(resolve.bind(null, value), ms));
 
-describe('"Lionel Slider" Subscription Offer Prompt', () => {
+describe.only('"Lionel Slider" Subscription Offer Prompt', () => {
 
-	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt')
-	const sessionStorage = new Superstore('session', 'next.product-selector')
+	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
+	const sessionStorage = new Superstore('session', 'next.product-selector');
 
 	let flags;
 
@@ -26,7 +26,7 @@ describe('"Lionel Slider" Subscription Offer Prompt', () => {
 			localStorage.set('last-closed', Date.now() - (1000 * 60 * 60 * 24 * 30)),
 			sessionStorage.set('last-seen', Date.now()),
 			sessionStorage.set('barrier-messaging', 'B2C')
-		])
+		]);
 	});
 
 	afterEach(() => {
@@ -40,7 +40,7 @@ describe('"Lionel Slider" Subscription Offer Prompt', () => {
 		]);
 	});
 
-		it ('should be a popup', () =>
+	it('should be a popup', () =>
 		init(flags).then(popup => {
 		expect(popup).to.be.ok;
 		})
@@ -61,21 +61,21 @@ describe('"Lionel Slider" Subscription Offer Prompt', () => {
 
 	it('should have correct html when the priceFlashSale flag is on', () =>
 		init(flags).then(popup => {
-			expect(popup.el.innerHTML).to.contain('Save 33% now')
+			expect(popup.el.innerHTML).to.contain('Save 33% now');
 		})
 	);
 
 	it('should have correct html when the priceFlashSale flag is off', () => {
 			flags = { get: (val) => val === 'b2cMessagePrompt'};
 			init(flags).then(popup => {
-				expect(popup.el.innerHTML).to.contain('You qualify for a 25% subscription discount')
-			})
+				expect(popup.el.innerHTML).to.contain('You qualify for a 25% subscription discount');
+			});
 		}
 	);
 
 	it('should set onClose to function', () =>
 		init(flags).then(popup => {
-			expect(popup.el.onClose).to.be.a('function')
+			expect(popup.el.onClose).to.be.a('function');
 		})
 	);
 
@@ -102,17 +102,17 @@ describe('"Lionel Slider" Subscription Offer Prompt', () => {
 
 
 	it('should not show if last shown within 30 days', () => {
-		localStorage.set('last-closed', Date.now() + (1000 * 60 * 60 * 24 * 29))
+		localStorage.set('last-closed', Date.now() + (1000 * 60 * 60 * 24 * 29));
 		return init(flags).then(popup => expect(popup).to.not.exist);
 	});
 
 	it('should not show if barrier page has not been visited in this session', () => {
-		sessionStorage.unset('last-seen')
+		sessionStorage.unset('last-seen');
 		return init(flags).then(popup => expect(popup).to.not.exist);
 	});
 
 	it('should not show in succession to a B2B barrier', () => {
-		sessionStorage.set('barrier-messaging', 'B2B')
+		sessionStorage.set('barrier-messaging', 'B2B');
 		return init(flags).then(popup => expect(popup).to.not.exist);
 	});
 
@@ -120,8 +120,8 @@ describe('"Lionel Slider" Subscription Offer Prompt', () => {
 
 describe('"Lionel Slider" Subscription Offer Prompt - USA', () => {
 
-	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt')
-	const sessionStorage = new Superstore('session', 'next.product-selector')
+	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
+	const sessionStorage = new Superstore('session', 'next.product-selector');
 
 	let flags;
 
@@ -138,7 +138,7 @@ describe('"Lionel Slider" Subscription Offer Prompt - USA', () => {
 			localStorage.set('last-closed', Date.now() - (1000 * 60 * 60 * 24 * 30)),
 			sessionStorage.set('last-seen', Date.now()),
 			sessionStorage.set('barrier-messaging', 'B2C')
-		])
+		]);
 	});
 
 	afterEach(() => {
@@ -154,15 +154,15 @@ describe('"Lionel Slider" Subscription Offer Prompt - USA', () => {
 
 	it('should have correct price when the priceFlashSale flag is on', () =>
 		init(flags).then(popup => {
-			expect(popup.el.innerHTML).to.contain('$4.29')
+			expect(popup.el.innerHTML).to.contain('$4.29');
 		})
 	);
 
 	it('should have correct price when the priceFlashSale flag is off', () => {
 			flags = { get: (val) => val === 'b2cMessagePrompt'};
 			init(flags).then(popup => {
-				expect(popup.el.innerHTML).to.contain('$4.29')
-			})
+				expect(popup.el.innerHTML).to.contain('$4.29');
+			});
 		}
 	);
 
@@ -170,8 +170,8 @@ describe('"Lionel Slider" Subscription Offer Prompt - USA', () => {
 
 describe('"Lionel Slider" Subscription Offer Prompt - country code not listed', () => {
 
-	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt')
-	const sessionStorage = new Superstore('session', 'next.product-selector')
+	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
+	const sessionStorage = new Superstore('session', 'next.product-selector');
 
 	let flags;
 
@@ -188,7 +188,7 @@ describe('"Lionel Slider" Subscription Offer Prompt - country code not listed', 
 			localStorage.set('last-closed', Date.now() - (1000 * 60 * 60 * 24 * 30)),
 			sessionStorage.set('last-seen', Date.now()),
 			sessionStorage.set('barrier-messaging', 'B2C')
-		])
+		]);
 	});
 
 	afterEach(() => {
@@ -205,8 +205,8 @@ describe('"Lionel Slider" Subscription Offer Prompt - country code not listed', 
 	it('should default to Euros when country code is one not listed', () => {
 			flags = { get: (val) => val === 'b2cMessagePrompt'};
 			init(flags).then(popup => {
-				expect(popup.el.innerHTML).to.contain('€4.39')
-			})
+				expect(popup.el.innerHTML).to.contain('€4.39');
+			});
 		}
 	);
 
