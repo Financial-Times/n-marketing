@@ -6,6 +6,8 @@
 /node_modules/
 /public/
 /npm-debug.log
+/pa11y_screenCapture
 
 .editorconfig
 .eslintrc.js
+package-lock.json
