@@ -1,7 +1,11 @@
-include n.Makefile
+node_modules/@financial-times/n-gage/index.mk:
+	npm install --no-save --no-package-lock @financial-times/n-gage
+	touch $@
 
-# unit-test:
-	# mocha 'test/*.spec.js' --recursive --inline-diffs
+-include node_modules/@financial-times/n-gage/index.mk
+
+unit-test:
+	karma start
 
 demo-build:
 	webpack --config demos/webpack.config.js
@@ -9,3 +13,8 @@ demo-build:
 
 demo: demo-build
 	@node demos/app
+
+a11y: demo-build
+	@node .pa11yci.js
+	@PA11Y=true node demos/app
+	@$(DONE)

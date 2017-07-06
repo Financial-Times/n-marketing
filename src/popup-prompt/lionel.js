@@ -77,7 +77,7 @@ const createSubscriptionPrompt = values => {
 		focusableElements.forEach((elem) => {
 			elem.setAttribute('tabindex', '-1');
 		});
-	}
+	};
 	document.body.appendChild(subscriptionPrompt);
 
 	let firstTabStop = focusableElements[0];
@@ -172,7 +172,7 @@ const render = (countryCode, withDiscount) => {
 	}
 	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount);
 	return createSubscriptionPrompt(subscriptionValues);
-}
+};
 
 const init = (flags) => {
 	return shouldPromptBeShown()
@@ -181,10 +181,10 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						render(countryCode, flags.get('priceFlashSale'))
+						return render(countryCode, flags.get('priceFlashSale'));
 					});
 			}
 		});
-}
+};
 
-module.exports = {init, render}
+module.exports = {init, render};
