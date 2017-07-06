@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { expect } from 'chai';
 const utils = require('../src/popup-prompt/utils');
 const padLeft = utils.padLeft;
@@ -34,13 +33,13 @@ describe('utils', function () {
 		);
 
 		it('adds 0s to string by length', () => {
-			expect(padLeft('', 10)).to.equal('0000000000')
-			expect(padLeft('foo', 10)).to.equal('0000000foo')
+			expect(padLeft('', 10)).to.equal('0000000000');
+			expect(padLeft('foo', 10)).to.equal('0000000foo');
 		});
 
 		it('pad character can be overriden', () => {
-			expect(padLeft('', 10, '!')).to.equal('!!!!!!!!!!')
-			expect(padLeft('foo', 10, '!')).to.equal('!!!!!!!foo')
+			expect(padLeft('', 10, '!')).to.equal('!!!!!!!!!!');
+			expect(padLeft('foo', 10, '!')).to.equal('!!!!!!!foo');
 		});
 
 	});
