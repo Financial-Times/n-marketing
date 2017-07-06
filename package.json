@@ -8,6 +8,7 @@
     "chalk": "^2.0.1",
     "child-process": "^1.0.2",
     "css-loader": "^0.26.1",
+    "eslint": "^4.1.1",
     "pa11y-ci": "^1.2.0"
   },
   "scripts": {

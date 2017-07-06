@@ -54,11 +54,6 @@ describe('Subscription Offer Prompt Init', () => {
 		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
 	});
 
-	it('should init "Lionel slider" if NOT logged in & NOT on barrier page & NOT coming from a B2B prospect barrier & NOT on /us-election-2016 page', () => {
-		subscriptionOfferPrompt({flags});
-		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
-	});
-
 	it('should render "Lionel slider" if demoMode is true', function () {
 		subscriptionOfferPrompt({flags, demoMode: true});
 		expect(document.body.innerHTML).to.contain('subscription-prompt--flag');
