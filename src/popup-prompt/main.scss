@@ -6,15 +6,13 @@
 }
 
 .subscription-prompt--flag {
+	@include oTypographySansBold(0);
 	background-color: oColorsGetPaletteColor('mandarin');
 	border-radius: 3px;
 	padding: 4px 12px 5px;
 	text-align: center;
 	color: oColorsGetPaletteColor('black-80');
-	font-size: 15px;
-	font-weight: 600;
 	text-transform: uppercase;
-	line-height: 17px;
 	margin-bottom: 10px;
 	margin-top: 8px;
 	display: inline-block;
