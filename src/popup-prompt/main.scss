@@ -6,43 +6,38 @@
 }
 
 .subscription-prompt--flag {
-	background-color: oColorsGetPaletteColor('black');
+	@include oTypographySansBold(0);
+	background-color: oColorsGetPaletteColor('mandarin');
 	border-radius: 3px;
-	padding: 4px 9px 5px;
+	padding: 4px 12px 5px;
 	text-align: center;
-	color: white;
-	font-size: 15px;
-	font-weight: 600;
+	color: oColorsGetPaletteColor('black-80');
 	text-transform: uppercase;
-	line-height: 17px;
 	margin-bottom: 10px;
+	margin-top: 4px;
 	display: inline-block;
+
+	@include oGridRespondTo(M) {
+		margin-top: 8px;
+	}
 }
 
 .subscription-prompt .subscription-prompt--heading {
-	@include oTypographySansBold(-1);
+	@include oTypographySansBold(3);
 	color: oColorsGetPaletteColor('black-80');
 	margin: 0 0 4px;
-
-	@include oGridRespondTo(M) {
-		@include oTypographySansBold(2);
-	}
 }
 
 .subscription-prompt .subscription-prompt--subheading {
-	@include oTypographySansBold(-2);
+	@include oTypographySansBold(1);
 	font-weight: 300;
 	color: oColorsGetPaletteColor('black-80');
 	display: inline-block;
-	margin-bottom: 20px;
-
-	@include oGridRespondTo(M) {
-		@include oTypographySans(-1);
-	}
+	margin-bottom: 14px;
 }
 
 .subscription-prompt--benefits {
-	@include oTypographySansBold(-2);
+	@include oTypographySansBold(0);
 	display: none;
 	list-style: none;
 	font-weight: normal;
@@ -56,33 +51,30 @@
 
 .subscription-prompt--benefit {
 	position: relative;
-	margin-left: 20px;
+	margin-left: -5px;
 	margin-bottom: 6px;
 	color: oColorsGetPaletteColor('black-80');
 
 	&:before {
-		@include oIconsGetIcon('tick', #35bd14, 14, $iconset-version: 1);
+		@include oIconsGetIcon('tick', #35bd14, 24, $iconset-version: 1);
 		content: '';
-		margin-right: 4px;
-		position: absolute;
-		top: 2px;
-		left: -20px;
+		margin-bottom: -8px;
+		display: inline-block;
 	}
 }
 
 .subscription-prompt .subscription-prompt--subscribe-btn {
 	@include oButtons(default, Secondary);
-	@include oButtonsSize(default);
+	@include oButtonsSize(big);
 	@include oButtonsTheme(Primary);
 
 	font-size: 16px;
 	text-transform: none;
-	padding: 5px 9px 7px;
 	margin-top: 8px;
+	margin-bottom: 12px;
 
 	@include oGridRespondTo(M) {
-		margin-top: 24px;
-		width: 140px;
+		margin-top: 16px;
 	}
 }
 
