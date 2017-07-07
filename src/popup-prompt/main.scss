@@ -14,8 +14,12 @@
 	color: oColorsGetPaletteColor('black-80');
 	text-transform: uppercase;
 	margin-bottom: 10px;
-	margin-top: 8px;
+	margin-top: 4px;
 	display: inline-block;
+
+	@include oGridRespondTo(M) {
+		margin-top: 8px;
+	}
 }
 
 .subscription-prompt .subscription-prompt--heading {
@@ -66,8 +70,12 @@
 
 	font-size: 16px;
 	text-transform: none;
-	margin-top: 16px;
+	margin-top: 8px;
 	margin-bottom: 12px;
+
+	@include oGridRespondTo(M) {
+		margin-top: 16px;
+	}
 }
 
 .subscription-prompt--aside {
