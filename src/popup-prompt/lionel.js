@@ -69,6 +69,15 @@ const createSubscriptionPrompt = values => {
 
 	subscriptionPrompt.onClose = () => {
 		setPromptLastClosed();
+		broadcast('oTracking.event', {
+			category: 'message',
+			action: 'close',
+			opportunity: {
+				type: 'discount',
+				subtype: 'slider_promo'
+			},
+			offers: [values.offerId]
+		});
 
 		if(focusedElementBeforePrompt !== undefined) {
 			focusedElementBeforePrompt.focus();
@@ -116,7 +125,7 @@ const createSubscriptionPrompt = values => {
 			action: 'show',
 			opportunity: {
 				type: 'discount',
-				subtype: ''
+				subtype: 'slider_promo'
 			},
 			offers: [values.offerId]
 		});
