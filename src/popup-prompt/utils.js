@@ -9,7 +9,7 @@ export const padLeft = (string, length, character = '0') => {
 		newString += character;
 	}
 	return newString + string;
-}
+};
 
 export const getCookie = (key) => () => (document.cookie.match(`(^|;)\\s*${key}=([^;]+)`) || [])[2];
 
@@ -18,7 +18,7 @@ export const createElement = (tag, attributes, html) => {
 	Object.keys(attributes || {}).forEach((key) => element.setAttribute(key, attributes[key]));
 	element.innerHTML = html;
 	return element;
-}
+};
 
 // use Number#toLocaleString when we drop Safari 9 support
 export const toCurrency = (amount, countryCode) => {
@@ -37,4 +37,4 @@ export const toCurrency = (amount, countryCode) => {
 		string += `.${padLeft(Math.floor(amount % 100), 2)}`;
 	}
 	return string;
-}
+};

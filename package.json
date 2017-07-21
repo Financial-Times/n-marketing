@@ -2,6 +2,7 @@
   "version": "0.0.0",
   "main": "main.js",
   "devDependencies": {
+    "@financial-times/n-gage": "^1.8.23",
     "@financial-times/n-internal-tool": "^1.2.3",
     "@financial-times/n-webpack": "^3.0.2",
     "bower": "^1.8.0",
