@@ -38,5 +38,3 @@ To deploy a new version of `n-marketing` publish a new release in github using a
 
 ### todo:
 - unit tests
-  
-

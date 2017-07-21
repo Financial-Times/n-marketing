@@ -7,6 +7,8 @@ node_modules/@financial-times/n-gage/index.mk:
 unit-test:
 	karma start
 
+test: verify unit-test
+
 demo-build:
 	webpack --config demos/webpack.config.js
 	@$(DONE)
