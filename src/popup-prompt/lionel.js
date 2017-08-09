@@ -11,7 +11,7 @@ const setPromptLastClosed = () => promptLastSeenStorage.set(promptLastSeenStorag
 
 const productSelectorStorage = new Superstore('session', 'next.product-selector');
 const getBarrierLastSeen = () => productSelectorStorage.get('last-seen');
-const getBarrierMessaging = async (flags) => flags.get('b2bCommsCohort') ? 'B2B' : await productSelectorStorage.get('barrier-messaging');
+const getBarrierMessaging = (flags) => flags.get('b2bCommsCohort') ? Promise.resolve('B2B') : productSelectorStorage.get('barrier-messaging');
 
 /**
  * Show the prompt if
