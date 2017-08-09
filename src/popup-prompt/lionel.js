@@ -11,7 +11,7 @@ const setPromptLastClosed = () => promptLastSeenStorage.set(promptLastSeenStorag
 
 const productSelectorStorage = new Superstore('session', 'next.product-selector');
 const getBarrierLastSeen = () => productSelectorStorage.get('last-seen');
-const getBarrierMessaging = () => productSelectorStorage.get('barrier-messaging');
+const getBarrierMessaging = (flags) => flags.get('b2bCommsCohort') ? Promise.resolve('B2B') : productSelectorStorage.get('barrier-messaging');
 
 /**
  * Show the prompt if
@@ -21,8 +21,8 @@ const getBarrierMessaging = () => productSelectorStorage.get('barrier-messaging'
  *	* the last barrier shown did not have B2B messaging
  *	* the prompt has not been closed, or was last closed more than 30 days ago
  */
-const shouldPromptBeShown = () => {
-	return Promise.all([getBarrierLastSeen(), getBarrierMessaging(), getPromptLastClosed()])
+const shouldPromptBeShown = (flags) => {
+	return Promise.all([getBarrierLastSeen(), getBarrierMessaging(flags), getPromptLastClosed()])
 			.then(([barrierLastSeen, barrierMessaging, promptLastClosed]) =>
 				barrierLastSeen && barrierMessaging !=='B2B' && (!promptLastClosed || promptLastClosed + (1000 * 60 * 60 * 24 * 30) <= Date.now())
 			);
@@ -184,7 +184,7 @@ const render = (countryCode, withDiscount) => {
 };
 
 const init = (flags) => {
-	return shouldPromptBeShown()
+	return shouldPromptBeShown(flags)
 		.then(shouldShow => {
 			if (shouldShow) {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })

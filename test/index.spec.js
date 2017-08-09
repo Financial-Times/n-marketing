@@ -4,9 +4,7 @@ import subscriptionOfferPrompt from '../src/popup-prompt/index';
 import api from '../src/popup-prompt/countryApi';
 
 
-sinon.stub(api, 'getCountryCode', function () {
-	return 'GBR';
-});
+sinon.stub(api, 'getCountryCode').callsFake(() => 'GBR');
 
 describe('Subscription Offer Prompt Init', () => {
 

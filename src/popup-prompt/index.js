@@ -25,19 +25,20 @@ show and which one. And then allow the prompt logic to further decide.
 */
 
 const isLoggedIn = utils.getCookie('FTSession');
-const isB2bUser = utils.getCookie('FTBarrierAcqCtxRef');
+const exclusions = ['.ft-subscription-panel', '.inline-barrier', '.sub-header--fastft'];
 
 /*
 @param {Object} flags -
 */
 // TODO a11y: move focus to _any_ pop up
 module.exports = function init ({flags, demoMode}) {
-	if (demoMode) return lionel.render('GBR', false);
-	const messagesEnabled = flags.get('b2cMessagePrompt');
-	if (isLoggedIn() || isB2bUser() || document.querySelector('.ft-subscription-panel') || !messagesEnabled || document.querySelector('.inline-barrier') || document.querySelector('.sub-header--fastft') ) {
-		return;
+	if (demoMode) {
+		return lionel.render('GBR', false);
 	}
-	else {
+	const messagesEnabled = flags.get('b2cMessagePrompt');
+	const isB2bUser = flags.get('b2bCommsCohort');
+	const coexists = (elements) => elements.some(e => document.querySelector(e));
+	if (!isLoggedIn() && !isB2bUser && messagesEnabled && !coexists(exclusions)) {
 		return lionel.init(flags);
 	}
 };
