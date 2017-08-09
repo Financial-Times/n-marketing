@@ -11,10 +11,10 @@ describe.only('"Lionel Slider" Subscription Offer Prompt', () => {
 	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
 	const sessionStorage = new Superstore('session', 'next.product-selector');
 
-	let flags;
+	let flags = {};
 
 	beforeEach(() => {
-		flags = { get: (val) => val === 'b2cMessagePrompt' || val === 'priceFlashSale' };
+		flags.get = (val) => val === 'b2cMessagePrompt' || val === 'priceFlashSale';
 		const fetchStub = sinon.stub(window, 'fetch');
 		fetchStub
 			.withArgs('https://www.ft.com/country')
@@ -34,9 +34,9 @@ describe.only('"Lionel Slider" Subscription Offer Prompt', () => {
 
 		// fixme - the tests fail in IE11 if these are not commented out.  I have no idea why..
 		return Promise.all([
-			// localStorage.unset('last-closed'),
-			// sessionStorage.unset('last-seen'),
-			// sessionStorage.unset('barrier-messaging')
+			localStorage.unset('last-closed'),
+			sessionStorage.unset('last-seen'),
+			sessionStorage.unset('barrier-messaging')
 		]);
 	});
 
@@ -111,10 +111,19 @@ describe.only('"Lionel Slider" Subscription Offer Prompt', () => {
 		return init(flags).then(popup => expect(popup).to.not.exist);
 	});
 
-	it('should not show in succession to a B2B barrier', () => {
-		sessionStorage.set('barrier-messaging', 'B2B');
-		return init(flags).then(popup => expect(popup).to.not.exist);
+	describe('should not show in succession to a B2B barrier', () => {
+
+		it('when user is in a B2B cohort', () => {
+			flags = { get: (val) => val === 'b2cMessagePrompt' || val === 'priceFlashSale' || val === 'b2bCommsCohort' };
+			return init(flags).then(popup => expect(popup).to.not.exist);
+		});
+
+		it('when B2B session variable is set', () => {
+			sessionStorage.set('barrier-messaging', 'B2B');
+			return init(flags).then(popup => expect(popup).to.not.exist);
+		});
 	});
+
 
 });
 

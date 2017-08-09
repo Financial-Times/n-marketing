@@ -14,8 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "n-ui-foundations": "^2.0.0-beta",
-    "n-sliding-popup": "^2.0.0-beta",
+    "n-ui-foundations": "^2.4.0",
+    "n-sliding-popup": "^2.0.0",
     "superstore": "^2.1.0"
   }
 }

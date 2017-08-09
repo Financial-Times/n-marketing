@@ -25,7 +25,6 @@ show and which one. And then allow the prompt logic to further decide.
 */
 
 const isLoggedIn = utils.getCookie('FTSession');
-const isB2bUser = utils.getCookie('FTBarrierAcqCtxRef');
 
 /*
 @param {Object} flags -
@@ -34,7 +33,13 @@ const isB2bUser = utils.getCookie('FTBarrierAcqCtxRef');
 module.exports = function init ({flags, demoMode}) {
 	if (demoMode) return lionel.render('GBR', false);
 	const messagesEnabled = flags.get('b2cMessagePrompt');
-	if (isLoggedIn() || isB2bUser() || document.querySelector('.ft-subscription-panel') || !messagesEnabled || document.querySelector('.inline-barrier') || document.querySelector('.sub-header--fastft') ) {
+	const isB2bUser = flags.get('b2bCommsCohort');
+	const coexists = (elements) => elements.forEach(e => {
+		if(document.querySelector(e)) {
+			return true;
+		}
+	}) 
+	if (isLoggedIn() || isB2bUser || document.querySelector('.ft-subscription-panel') || !messagesEnabled || document.querySelector('.inline-barrier') || document.querySelector('.sub-header--fastft') ) {
 		return;
 	}
 	else {
