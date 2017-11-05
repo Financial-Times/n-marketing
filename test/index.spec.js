@@ -47,7 +47,7 @@ describe('Subscription Offer Prompt Init', () => {
 
 	it('should not init any prompt if b2cMessagePrompt flag is false', () => {
 		// stub out the flag.get(b2cMessagePrompt) = false
-		flags = { get: (val) => { if(val === 'b2cMessagePrompt') return false } }
+		flags = { get: (val) => { if(val === 'b2cMessagePrompt') return false; } };
 		subscriptionOfferPrompt({flags});
 		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
 	});
