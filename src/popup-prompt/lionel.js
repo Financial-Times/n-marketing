@@ -29,26 +29,39 @@ const shouldPromptBeShown = (flags) => {
 };
 
 const popupTemplate = ({ discount, price, offerId, offerText}) => `
-	<article class="subscription-prompt--wrapper" data-trackable="subscription-offer-prompt">
-		<button class="n-sliding-popup-close" data-n-component="n-sliding-popup-close" data-trackable="close">
-			<span class="n-sliding-popup-close-label">Close</span>
-		</button>
-		<div class="subscription-prompt--header" data-o-grid-colspan="12">
-			<span class="subscription-prompt--flag">Limited Offer</span>
-			<h1 class="subscription-prompt--heading">${offerText}</h1>
-			<span class="subscription-prompt--subheading">
-				Pay just ${price} per week for annual Standard Digital access
-			</span>
+	<div class="o-banner o-banner--small o-banner--marketing-secondary" data-o-component="o-banner">
+	<div class="o-banner__outer">
+		<div class="o-banner__inner" data-o-banner-inner="">
+			<div class="o-banner__content o-banner__content--long">
+				<header class="o-banner__heading">
+					<p>Limited time only</p>
+					<h1>${offerText}</h1>
+				</header>
+				<p>Pay just ${price} per week for annual Standard Digital access.</p>
+				<ul>
+					<li>Global news and opinion from experts in 50+ countries</li>
+					<li>Access on desktop and mobile</li>
+					<li>Market-moving news, politics, tech, the arts and more</li>
+				</ul>
+			</div>
+			<div class="o-banner__content o-banner__content--short">
+				<header class="o-banner__heading">
+					<p>Limited time only</p>
+					<h1>You qualify for a special offer: Save ${discount}%</h1>
+				</header>
+				<p>Pay just ${price} per week for annual Standard Digital access.</p>
+			</div>
+			<div class="o-banner__actions">
+				<div class="o-banner__action">
+					<a href="https://www.ft.com/signup?offerId=${offerId}" class="o-banner__button subscription-prompt__subscribe-btn" data-trackable="subscribe">Save ${discount}% now</a>
+				</div>
+			</div>
+			<button class="n-sliding-popup-close" data-n-component="n-sliding-popup-close" data-trackable="close">
+				<span class="n-sliding-popup-close-label">Close</span>
+			</button>
 		</div>
-		<div class="subscription-prompt--info" data-o-grid-colspan="12">
-			<ul class="subscription-prompt--benefits">
-				<li class="subscription-prompt--benefit">Access FT.com on your desktop, mobile &amp; tablet</li>
-				<li class="subscription-prompt--benefit">5 year company financials archive</li>
-				<li class="subscription-prompt--benefit">Personalised email briefings and market moving news</li>
-			</ul>
-			<a href="https://www.ft.com/signup?offerId=${offerId}" class="subscription-prompt--subscribe-btn" data-trackable="subscribe">Save ${discount}% now</a>
-		</div>
-	</article>
+	</div>
+</div>
 `;
 
 const createPopupHTML = values =>
@@ -61,7 +74,7 @@ const createPopupHTML = values =>
 
 const createSubscriptionPrompt = values => {
 	let focusedElementBeforePrompt;
-	let focusableElementsStrings = ['.subscription-prompt--subscribe-btn', '.n-sliding-popup-close'];
+	let focusableElementsStrings = ['.subscription-prompt__subscribe-btn', '.n-sliding-popup-close'];
 
 	const subscriptionPrompt = createPopupHTML(values);
 	let focusableElements = subscriptionPrompt.querySelectorAll(focusableElementsStrings);

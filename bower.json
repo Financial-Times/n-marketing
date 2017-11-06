@@ -16,6 +16,7 @@
   "dependencies": {
     "n-ui-foundations": "^2.4.0",
     "n-sliding-popup": "^2.0.0",
-    "superstore": "^2.1.0"
+    "superstore": "^2.1.0",
+    "o-banner": "^1.2.0"
   }
 }
