@@ -29,14 +29,14 @@ const shouldPromptBeShown = (flags) => {
 			);
 };
 
-const popupTemplate = ({ discount, price, offerId, offerText}) => `
+const popupTemplate = ({ discount, price, offerId }) => `
 	<div class="o-banner o-banner--small o-banner--marketing-secondary" data-o-component="o-banner">
 	<div class="o-banner__outer">
 		<div class="o-banner__inner" data-o-banner-inner="">
 			<div class="o-banner__content o-banner__content--long">
 				<header class="o-banner__heading">
 					<p>Limited time only</p>
-					<h1>${offerText}</h1>
+					<h1>You qualify for a special offer: Save ${discount}%</h1>
 				</header>
 				<p>Pay just ${price} per week for annual Standard Digital access.</p>
 				<ul>
@@ -48,7 +48,7 @@ const popupTemplate = ({ discount, price, offerId, offerText}) => `
 			<div class="o-banner__content o-banner__content--short">
 				<header class="o-banner__heading">
 					<p>Limited time only</p>
-					<h1>${offerText}</h1>
+					<h1>You qualify for a special offer: Save ${discount}%</h1>
 				</header>
 				<p>Pay just ${price} per week for annual Standard Digital access.</p>
 			</div>
@@ -182,9 +182,9 @@ const getPrice = (countryCode, withDiscount) => {
 const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 	const price = getPrice(countryCode, withDiscount);
 	if (countryCode === 'USA' || withDiscount) {
-		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price, offerText: 'Save 33% now'};
+		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price };
 	} else {
-		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, offerText: 'You qualify for a 25% subscription discount'};
+		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price };
 	}
 };
 
