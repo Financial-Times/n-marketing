@@ -5,11 +5,12 @@ import * as utils from './utils';
 import { broadcast } from 'n-ui-foundations';
 
 const promptLastSeenStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
+const productSelectorStorage = new Superstore('session', 'next.product-selector');
+
 const promptLastSeenStorageKey = 'last-closed';
 const getPromptLastClosed = () => promptLastSeenStorage.get(promptLastSeenStorageKey);
 const setPromptLastClosed = () => promptLastSeenStorage.set(promptLastSeenStorageKey, Date.now());
 
-const productSelectorStorage = new Superstore('session', 'next.product-selector');
 const getBarrierLastSeen = () => productSelectorStorage.get('last-seen');
 const getBarrierMessaging = (flags) => flags.get('b2bCommsCohort') ? Promise.resolve('B2B') : productSelectorStorage.get('barrier-messaging');
 
@@ -47,7 +48,7 @@ const popupTemplate = ({ discount, price, offerId, offerText}) => `
 			<div class="o-banner__content o-banner__content--short">
 				<header class="o-banner__heading">
 					<p>Limited time only</p>
-					<h1>You qualify for a special offer: Save ${discount}%</h1>
+					<h1>${offerText}</h1>
 				</header>
 				<p>Pay just ${price} per week for annual Standard Digital access.</p>
 			</div>
