@@ -6,7 +6,7 @@ import { init } from '../src/popup-prompt/lionel';
 
 const delay = (ms, value) => new Promise(resolve => setTimeout(resolve.bind(null, value), ms));
 
-describe.only('"Lionel Slider" Subscription Offer Prompt', () => {
+describe('"Lionel Slider" Subscription Offer Prompt', () => {
 
 	const localStorage = new Superstore('local', 'n-ui.subscription-offer-prompt');
 	const sessionStorage = new Superstore('session', 'next.product-selector');
