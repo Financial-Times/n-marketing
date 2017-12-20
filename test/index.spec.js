@@ -27,7 +27,7 @@ describe('Subscription Offer Prompt Init', () => {
 		barrier.className = 'ft-subscription-panel';
 		document.body.appendChild(barrier);
 		subscriptionOfferPrompt({flags});
-		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
+		expect(document.body.innerHTML).to.not.contain('You qualify for a special offer');
 		document.body.removeChild(barrier);
 	});
 
@@ -35,25 +35,25 @@ describe('Subscription Offer Prompt Init', () => {
 		Object.defineProperty(document, 'cookie', { value: 'FTSession=foo', configurable: true });
 
 		subscriptionOfferPrompt({flags});
-		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
+		expect(document.body.innerHTML).to.not.contain('You qualify for a special offer');
 	});
 
 	it('should not init any prompt if B2B referrer cookie exists', () => {
 		Object.defineProperty(document, 'cookie', { value: 'FTBarrierAcqCtxRef=foo', configurable: true });
 
 		subscriptionOfferPrompt({flags});
-		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
+		expect(document.body.innerHTML).to.not.contain('You qualify for a special offer');
 	});
 
 	it('should not init any prompt if b2cMessagePrompt flag is false', () => {
 		// stub out the flag.get(b2cMessagePrompt) = false
 		flags = { get: (val) => { if(val === 'b2cMessagePrompt') return false; } };
 		subscriptionOfferPrompt({flags});
-		expect(document.body.innerHTML).to.not.contain('subscription-prompt--flag');
+		expect(document.body.innerHTML).to.not.contain('You qualify for a special offer');
 	});
 
 	it('should render "Lionel slider" if demoMode is true', function () {
 		subscriptionOfferPrompt({flags, demoMode: true});
-		expect(document.body.innerHTML).to.contain('subscription-prompt--flag');
+		expect(document.body.innerHTML).to.contain('You qualify for a special offer');
 	});
 });
