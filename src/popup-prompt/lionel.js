@@ -38,7 +38,7 @@ const popupTemplate = ({ discount, price, offerId }) => `
 					<p>Limited time only</p>
 					<h1>You qualify for a special offer: Save ${discount}%</h1>
 				</header>
-				<p>Pay just ${price} per week for annual Standard Digital access.</p>
+				<p>Pay just ${price} per week for annual Digital access.</p>
 				<ul>
 					<li>Global news and opinion from experts in 50+ countries</li>
 					<li>Access on desktop and mobile</li>
@@ -50,7 +50,7 @@ const popupTemplate = ({ discount, price, offerId }) => `
 					<p>Limited time only</p>
 					<h1>You qualify for a special offer: Save ${discount}%</h1>
 				</header>
-				<p>Pay just ${price} per week for annual Standard Digital access.</p>
+				<p>Pay just ${price} per week for annual Digital access.</p>
 			</div>
 			<div class="o-banner__actions">
 				<div class="o-banner__action">
