@@ -74,13 +74,13 @@ const setTemplateContent = ({ discount, price, offerId, countryCode }) => {
 	let extraText;
 
 	if (countryCode.toLowerCase() === 'usa' ) {
-		headingParagraph = `Special US offer through July 31`;
+		headingParagraph = 'Special US offer through July 31';
 		heading = `Save over ${discount}%`;
-		paragraph = `Pay only $12 per month for 12 months of Standard Digital access`;
-		buttonLabel = `Subscribe`;
-		extraText = `<p>*Available for new customers only</p>`;
+		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
+		buttonLabel = 'Subscribe';
+		extraText = '<p>*Available for new customers only</p>';
 	} else {
-		headingParagraph = `Limited time only`;
+		headingParagraph = 'Limited time only';
 		heading = `You qualify for a special offer: Save ${discount}%`;
 		paragraph = `Pay just ${price} per week for annual Digital access.`;
 		buttonLabel = `Save ${discount}% now`;
@@ -88,7 +88,7 @@ const setTemplateContent = ({ discount, price, offerId, countryCode }) => {
 
 	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText });
 
-}
+};
 
 const createPopupHTML = values =>
 	utils.createElement('div', {
