@@ -29,48 +29,73 @@ const shouldPromptBeShown = (flags) => {
 			);
 };
 
-const popupTemplate = ({ discount, price, offerId }) => `
-	<div class="o-banner o-banner--small o-banner--marketing-secondary" data-o-component="o-banner">
-	<div class="o-banner__outer">
-		<div class="o-banner__inner" data-o-banner-inner="">
-			<div class="o-banner__content o-banner__content--long">
-				<header class="o-banner__heading">
-					<p>Limited time only</p>
-					<h1>You qualify for a special offer: Save ${discount}%</h1>
-				</header>
-				<p>Pay just ${price} per week for annual Digital access.</p>
-				<ul>
-					<li>Global news and opinion from experts in 50+ countries</li>
-					<li>Access on desktop and mobile</li>
-					<li>Market-moving news, politics, tech, the arts and more</li>
-				</ul>
-			</div>
-			<div class="o-banner__content o-banner__content--short">
-				<header class="o-banner__heading">
-					<p>Limited time only</p>
-					<h1>You qualify for a special offer: Save ${discount}%</h1>
-				</header>
-				<p>Pay just ${price} per week for annual Digital access.</p>
-			</div>
-			<div class="o-banner__actions">
-				<div class="o-banner__action">
-					<a href="https://www.ft.com/signup?offerId=${offerId}" class="o-banner__button subscription-prompt__subscribe-btn" data-trackable="subscribe">Save ${discount}% now</a>
+const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText = '' }) => `
+		<div class="o-banner o-banner--small o-banner--marketing-secondary" data-o-component="o-banner">
+		<div class="o-banner__outer">
+			<div class="o-banner__inner" data-o-banner-inner="">
+				<div class="o-banner__content o-banner__content--long">
+					<header class="o-banner__heading">
+						<p>${headingParagraph}</p>
+						<h1>${heading}</h1>
+					</header>
+					<p>${paragraph}</p>
+					<ul>
+						<li>Global news and opinion from experts in 50+ countries</li>
+						<li>Access on desktop and mobile</li>
+						<li>Market-moving news, politics, tech, the arts and more</li>
+					</ul>
 				</div>
+				<div class="o-banner__content o-banner__content--short">
+					<header class="o-banner__heading">
+						<p>${headingParagraph}</p>
+						<h1>${heading}</h1>
+					</header>
+					<p>${paragraph}</p>
+				</div>
+				<div class="o-banner__actions">
+					<div class="o-banner__action">
+						<a href="https://www.ft.com/signup?offerId=${offerId}" class="o-banner__button subscription-prompt__subscribe-btn" data-trackable="subscribe">${buttonLabel}</a>
+					</div>
+				</div>
+				<button class="n-sliding-popup-close" data-n-component="n-sliding-popup-close" data-trackable="close">
+					<span class="n-sliding-popup-close-label">Close</span>
+				</button>
+				${extraText}
 			</div>
-			<button class="n-sliding-popup-close" data-n-component="n-sliding-popup-close" data-trackable="close">
-				<span class="n-sliding-popup-close-label">Close</span>
-			</button>
 		</div>
 	</div>
-</div>
-`;
+	`;
+
+const setTemplateContent = ({ discount, price, offerId, countryCode }) => {
+	let headingParagraph;
+	let heading;
+	let paragraph;
+	let buttonLabel;
+	let extraText;
+
+	if (countryCode.toLowerCase() === 'usa' ) {
+		headingParagraph = `Special US offer through July 31`;
+		heading = `Save over ${discount}%`;
+		paragraph = `Pay only $12 per month for 12 months of Standard Digital access`;
+		buttonLabel = `Subscribe`;
+		extraText = `<p>*Available for new customers only</p>`;
+	} else {
+		headingParagraph = `Limited time only`;
+		heading = `You qualify for a special offer: Save ${discount}%`;
+		paragraph = `Pay just ${price} per week for annual Digital access.`;
+		buttonLabel = `Save ${discount}% now`;
+	}
+
+	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText });
+
+}
 
 const createPopupHTML = values =>
 	utils.createElement('div', {
 		'class': 'n-sliding-popup subscription-prompt',
 		'data-n-component': 'o-sliding-popup',
 		'data-n-sliding-popup-position': 'bottom left',
-	}, popupTemplate(values));
+	}, setTemplateContent(values));
 
 
 const createSubscriptionPrompt = values => {
@@ -182,9 +207,9 @@ const getPrice = (countryCode, withDiscount) => {
 const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 	const price = getPrice(countryCode, withDiscount);
 	if (countryCode === 'USA' || withDiscount) {
-		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price };
+		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode };
 	} else {
-		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price };
+		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, countryCode };
 	}
 };
 
