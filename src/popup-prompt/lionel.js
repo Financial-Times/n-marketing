@@ -66,14 +66,14 @@ const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offe
 	</div>
 	`;
 
-const setTemplateContent = ({ discount, price, offerId, countryCode }) => {
+const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount }) => {
 	let headingParagraph;
 	let heading;
 	let paragraph;
 	let buttonLabel;
 	let extraText;
 
-	if (countryCode.toLowerCase() === 'usa' ) {
+	if (countryCode.toLowerCase() === 'usa' && !withDiscount ) {
 		headingParagraph = 'Special US offer through July 31';
 		heading = `Save over ${discount}%*`;
 		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
@@ -206,10 +206,12 @@ const getPrice = (countryCode, withDiscount) => {
 
 const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 	const price = getPrice(countryCode, withDiscount);
-	if (countryCode === 'USA' || withDiscount) {
-		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode };
+	if (withDiscount) {
+		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price, countryCode, withDiscount };
+	} else if (countryCode === 'USA') {
+		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode, withDiscount };
 	} else {
-		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, countryCode };
+		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, countryCode, withDiscount };
 	}
 };
 
