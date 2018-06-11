@@ -66,14 +66,14 @@ const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offe
 	</div>
 	`;
 
-const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount }) => {
+const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount, usaSale }) => {
 	let headingParagraph;
 	let heading;
 	let paragraph;
 	let buttonLabel;
 	let extraText;
 
-	if (countryCode.toLowerCase() === 'usa' && !withDiscount ) {
+	if (countryCode.toLowerCase() === 'usa' && !withDiscount && usaSale) {
 		headingParagraph = 'Special US offer through July 31';
 		heading = `Save over ${discount}%*`;
 		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
@@ -204,23 +204,23 @@ const getPrice = (countryCode, withDiscount) => {
 	return utils.toCurrency.apply(null, prices[countryCode] || prices.default);
 };
 
-const getSubscriptionPromptValues = (countryCode, withDiscount) => {
+const getSubscriptionPromptValues = (countryCode, withDiscount, usaSale) => {
 	const price = getPrice(countryCode, withDiscount);
 	if (withDiscount) {
 		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price, countryCode, withDiscount };
-	} else if (countryCode === 'USA') {
-		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode, withDiscount };
+	} else if (countryCode === 'USA' && usaSale) {
+		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode, withDiscount, usaSale };
 	} else {
 		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, countryCode, withDiscount };
 	}
 };
 
-const render = (countryCode, withDiscount) => {
+const render = (countryCode, withDiscount, usaSale) => {
 	// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 	if (['SPM', 'ALA', 'BLM', 'MAF', 'AND', 'REU', 'GLP', 'MYT', 'MTQ', 'ZWE'].indexOf(countryCode) > -1) {
 		return;
 	}
-	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount);
+	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount, usaSale);
 	return createSubscriptionPrompt(subscriptionValues);
 };
 
@@ -231,7 +231,7 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						return render(countryCode, flags.get('priceFlashSale'));
+						return render(countryCode, flags.get('priceFlashSale'), flags.get('usaPrintSale'));
 					});
 			}
 		});

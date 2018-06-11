@@ -33,7 +33,7 @@ const exclusions = ['.ft-subscription-panel', '.inline-barrier', '.sub-header--f
 // TODO a11y: move focus to _any_ pop up
 module.exports = function init ({flags, demoMode}) {
 	if (demoMode) {
-		return lionel.render('GBR', false);
+		return lionel.render('GBR', false, false);
 	}
 	const messagesEnabled = flags.get('b2cMessagePrompt');
 	const isB2bUser = flags.get('b2bCommsCohort');
