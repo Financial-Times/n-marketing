@@ -78,7 +78,7 @@ const setTemplateContent = ({ discount, price, offerId, countryCode }) => {
 		heading = `Save over ${discount}%`;
 		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
 		buttonLabel = 'Subscribe';
-		extraText = '<p>*Available for new customers only</p>';
+		extraText = '<p class="remove-bottom-margin">*Available for new customers only</p>';
 	} else {
 		headingParagraph = 'Limited time only';
 		heading = `You qualify for a special offer: Save ${discount}%`;
