@@ -75,7 +75,7 @@ const setTemplateContent = ({ discount, price, offerId, countryCode }) => {
 
 	if (countryCode.toLowerCase() === 'usa' ) {
 		headingParagraph = 'Special US offer through July 31';
-		heading = `Save over ${discount}%`;
+		heading = `Save over ${discount}%*`;
 		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
 		buttonLabel = 'Subscribe';
 		extraText = '<p class="remove-bottom-margin">*Available for new customers only</p>';
