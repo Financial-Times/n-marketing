@@ -24,9 +24,10 @@ You'll also need to import the css into your client `main.scss` file.
 ### Running n-marketing locally
 use `make demo` to run the component locally and view any changes, bypassing the logic that determines whether the slider is shown
 
-The demo function takes two parameters:
+The demo function takes three parameters:
 - `countryCode` - an ISO country code string. Use this to see how different currencies and location specific offers display
 - `withDiscount` - a boolean indicating whether an additional discount is being applied to the slider, the logic for which sits in `lionel.js`
+- `usaSale` - a boolean indicating whether the USA banner should be shown (Save up to 50%)
 
 Paramaters passed to the demo are hardcoded in `index.js`, change them manually to view variations of the slider:
 
