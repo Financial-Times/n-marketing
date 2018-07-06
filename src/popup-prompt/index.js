@@ -35,11 +35,15 @@ module.exports = function init ({flags, demoMode}) {
 	if (demoMode) {
 		return lionel.render('GBR', false, false);
 	}
-	const messagesEnabled = flags.get('b2cMessagePrompt');
-	const isB2bUser = flags.get('b2bCommsCohort');
-	const coexists = (elements) => elements.some(e => document.querySelector(e));
-	const bottomMessagePresent = flags.get('messageSlotBottom');
-	if (!isLoggedIn() && !isB2bUser && messagesEnabled && !coexists(exclusions) && !bottomMessagePresent) {
-		return lionel.init(flags);
+
+	const useMarketingBanner = flags.get('marketingBanner');
+	if (useMarketingBanner) {
+		const messagesEnabled = flags.get('b2cMessagePrompt');
+		const isB2bUser = flags.get('b2bCommsCohort');
+		const coexists = (elements) => elements.some(e => document.querySelector(e));
+		const bottomMessagePresent = flags.get('messageSlotBottom');
+		if (!isLoggedIn() && !isB2bUser && messagesEnabled && !coexists(exclusions) && !bottomMessagePresent) {
+			return lionel.init(flags);
+		}
 	}
 };
