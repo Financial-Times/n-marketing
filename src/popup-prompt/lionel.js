@@ -66,25 +66,17 @@ const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offe
 	</div>
 	`;
 
-const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount, usaSale }) => {
+const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount }) => {
 	let headingParagraph;
 	let heading;
 	let paragraph;
 	let buttonLabel;
 	let extraText;
 
-	if (countryCode.toLowerCase() === 'usa' && !withDiscount && usaSale) {
-		headingParagraph = 'Special US offer through July 31';
-		heading = `Save over ${discount}%*`;
-		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
-		buttonLabel = 'Subscribe';
-		extraText = '<p class="remove-bottom-margin">*Available for new customers only</p>';
-	} else {
-		headingParagraph = 'Limited time only';
-		heading = `You qualify for a special offer: Save ${discount}%`;
-		paragraph = `Pay just ${price} per week for annual Digital access.`;
-		buttonLabel = `Save ${discount}% now`;
-	}
+	headingParagraph = 'Limited time only';
+	heading = `You qualify for a special offer: Save ${discount}%`;
+	paragraph = `Pay just ${price} per week for annual Digital access.`;
+	buttonLabel = `Save ${discount}% now`;
 
 	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText });
 
@@ -204,23 +196,21 @@ const getPrice = (countryCode, withDiscount) => {
 	return utils.toCurrency.apply(null, prices[countryCode] || prices.default);
 };
 
-const getSubscriptionPromptValues = (countryCode, withDiscount, usaSale) => {
+const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 	const price = getPrice(countryCode, withDiscount);
 	if (withDiscount) {
 		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price, countryCode, withDiscount };
-	} else if (countryCode === 'USA' && usaSale) {
-		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode, withDiscount, usaSale };
 	} else {
 		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, countryCode, withDiscount };
 	}
 };
 
-const render = (countryCode, withDiscount, usaSale) => {
+const render = (countryCode, withDiscount) => {
 	// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 	if (['SPM', 'ALA', 'BLM', 'MAF', 'AND', 'REU', 'GLP', 'MYT', 'MTQ', 'ZWE'].indexOf(countryCode) > -1) {
 		return;
 	}
-	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount, usaSale);
+	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount);
 	return createSubscriptionPrompt(subscriptionValues);
 };
 
@@ -231,7 +221,7 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						return render(countryCode, flags.get('priceFlashSale'), flags.get('usaPrintSale'));
+						return render(countryCode);
 					});
 			}
 		});
