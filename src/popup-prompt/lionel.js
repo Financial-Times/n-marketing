@@ -29,7 +29,7 @@ const shouldPromptBeShown = (flags) => {
 			);
 };
 
-const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText = '' }) => `
+const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offerId }) => `
 		<div class="o-banner o-banner--small o-banner--marketing-secondary" data-o-component="o-banner">
 		<div class="o-banner__outer">
 			<div class="o-banner__inner" data-o-banner-inner="">
@@ -60,25 +60,18 @@ const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offe
 				<button class="n-sliding-popup-close" data-n-component="n-sliding-popup-close" data-trackable="close">
 					<span class="n-sliding-popup-close-label">Close</span>
 				</button>
-				${extraText}
 			</div>
 		</div>
 	</div>
 	`;
 
-const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount }) => {
-	let headingParagraph;
-	let heading;
-	let paragraph;
-	let buttonLabel;
-	let extraText;
+const setTemplateContent = ({ discount, price, offerId}) => {
+	const headingParagraph = 'Limited time only';
+	const heading = `You qualify for a special offer: Save ${discount}%`;
+	const paragraph = `Pay just ${price} per week for annual Digital access.`;
+	const buttonLabel = `Save ${discount}% now`;
 
-	headingParagraph = 'Limited time only';
-	heading = `You qualify for a special offer: Save ${discount}%`;
-	paragraph = `Pay just ${price} per week for annual Digital access.`;
-	buttonLabel = `Save ${discount}% now`;
-
-	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText });
+	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId });
 
 };
 
@@ -221,7 +214,7 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						return render(countryCode);
+						return render(countryCode, flags.get('priceFlashSale'));
 					});
 			}
 		});
