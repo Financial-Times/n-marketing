@@ -29,7 +29,7 @@ const shouldPromptBeShown = (flags) => {
 			);
 };
 
-const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText = '' }) => `
+const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offerId }) => `
 		<div class="o-banner o-banner--small o-banner--marketing-secondary" data-o-component="o-banner">
 		<div class="o-banner__outer">
 			<div class="o-banner__inner" data-o-banner-inner="">
@@ -60,33 +60,18 @@ const popupTemplate = ({ headingParagraph, heading, paragraph, buttonLabel, offe
 				<button class="n-sliding-popup-close" data-n-component="n-sliding-popup-close" data-trackable="close">
 					<span class="n-sliding-popup-close-label">Close</span>
 				</button>
-				${extraText}
 			</div>
 		</div>
 	</div>
 	`;
 
-const setTemplateContent = ({ discount, price, offerId, countryCode, withDiscount, usaSale }) => {
-	let headingParagraph;
-	let heading;
-	let paragraph;
-	let buttonLabel;
-	let extraText;
+const setTemplateContent = ({ discount, price, offerId}) => {
+	const headingParagraph = 'Limited time only';
+	const heading = `You qualify for a special offer: Save ${discount}%`;
+	const paragraph = `Pay just ${price} per week for annual Digital access.`;
+	const buttonLabel = `Save ${discount}% now`;
 
-	if (countryCode.toLowerCase() === 'usa' && !withDiscount && usaSale) {
-		headingParagraph = 'Special US offer through July 31';
-		heading = `Save over ${discount}%*`;
-		paragraph = 'Pay only $12 per month for 12 months of Standard Digital access';
-		buttonLabel = 'Subscribe';
-		extraText = '<p class="remove-bottom-margin">*Available for new customers only</p>';
-	} else {
-		headingParagraph = 'Limited time only';
-		heading = `You qualify for a special offer: Save ${discount}%`;
-		paragraph = `Pay just ${price} per week for annual Digital access.`;
-		buttonLabel = `Save ${discount}% now`;
-	}
-
-	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId, extraText });
+	return popupTemplate({ headingParagraph, heading, paragraph, buttonLabel, offerId });
 
 };
 
@@ -204,23 +189,21 @@ const getPrice = (countryCode, withDiscount) => {
 	return utils.toCurrency.apply(null, prices[countryCode] || prices.default);
 };
 
-const getSubscriptionPromptValues = (countryCode, withDiscount, usaSale) => {
+const getSubscriptionPromptValues = (countryCode, withDiscount) => {
 	const price = getPrice(countryCode, withDiscount);
 	if (withDiscount) {
 		return { discount: 33, offerId: 'a9582121-87c2-09a7-0cc0-4caf594985d5', price, countryCode, withDiscount };
-	} else if (countryCode === 'USA' && usaSale) {
-		return { discount: 50, offerId: 'c1b046a6-4b46-dc66-9bed-9f77389b619a', price, countryCode, withDiscount, usaSale };
 	} else {
 		return { discount: 25, offerId: 'c1773439-53dc-df3d-9acc-20ce2ecde318', price, countryCode, withDiscount };
 	}
 };
 
-const render = (countryCode, withDiscount, usaSale) => {
+const render = (countryCode, withDiscount) => {
 	// NOTE: for now, while pricing is inconsistent across slider, barrier and form, don't show it for these countries
 	if (['SPM', 'ALA', 'BLM', 'MAF', 'AND', 'REU', 'GLP', 'MYT', 'MTQ', 'ZWE'].indexOf(countryCode) > -1) {
 		return;
 	}
-	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount, usaSale);
+	const subscriptionValues = getSubscriptionPromptValues(countryCode, withDiscount);
 	return createSubscriptionPrompt(subscriptionValues);
 };
 
@@ -231,7 +214,7 @@ const init = (flags) => {
 				return fetch('https://www.ft.com/country', { credentials: 'same-origin' })
 					.then(response => response.json())
 					.then((countryCode = 'GBR') => {
-						return render(countryCode, flags.get('priceFlashSale'), flags.get('usaPrintSale'));
+						return render(countryCode, flags.get('priceFlashSale'));
 					});
 			}
 		});
